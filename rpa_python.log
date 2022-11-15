@@ -1,0 +1,20 @@
+
+START - automation started - Tue Oct 11 2022 10:34:01 GMT+0200 (Romance Daylight Time)
+
+LIVE MODE - type done to quit
+ [RPA][STARTED]
+[RPA][0] - listening for inputs
+[RPA][1] - https://ca.yahoo.com
+[RPA][1] - listening for inputs
+[RPA][2] - exist_result = exist('ybar-sbq').toString()
+[RPA][2] - listening for inputs
+[RPA][3] - dump exist_result to rpa_python.txt
+[RPA][3] - listening for inputs
+[RPA][4] - type ybar-sbq as github
+[RPA][4] - listening for inputs
+[RPA][5] - exist_result = exist('ybar-search').toString()
+[RPA][5] - listening for inputs
+[RPA][6] - dump exist_result to rpa_python.txt
+[RPA][6] - listening for inputs
+[RPA][7] - click ybar-search
+[RPA][7] - listening for inputs
