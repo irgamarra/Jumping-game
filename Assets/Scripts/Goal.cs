@@ -33,6 +33,9 @@ public class Goal : MonoBehaviour
         {
             winScreen = GameObject.Find("WinScreen");
         }
+
+        CalculateWallSize(leftWall);
+        CalculateWallSize(rightWall);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,7 +55,6 @@ public class Goal : MonoBehaviour
         if(spawnPoint.y > floor.transform.position.y)
             gameObject.transform.position = new Vector3 (selfPos.x, spawnPoint.y, selfPos.z);
 
-        SpriteRenderer lwSpriteRenderer = leftWall.GetComponent<SpriteRenderer>();
         CalculateWallSize(leftWall);
         CalculateWallSize(rightWall);
     }

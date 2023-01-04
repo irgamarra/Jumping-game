@@ -2,11 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainCamera : MonoBehaviour
 {
     public float cameraSize;
     public GameObject characterGameObject;
+
+    [SerializeField]
+    private float thresholdY = 2;
+
+    private bool CoroutineActive = false;
     void Start()
     {
         //Default Character's Game Object
@@ -24,8 +30,26 @@ public class MainCamera : MonoBehaviour
     {
         if (characterGameObject != null)
         {
-            if (characterGameObject.transform.position.y > gameObject.transform.position.y)
-                gameObject.transform.position = new Vector3(0, characterGameObject.transform.position.y, gameObject.transform.position.z);
+            float charactersY = characterGameObject.transform.position.y;
+            float thisY = gameObject.transform.position.y;
+            if (charactersY > thisY)
+                gameObject.transform.position = new Vector3(0, charactersY, gameObject.transform.position.z);
+            if (charactersY < thisY - thresholdY && !CoroutineActive)
+            {
+                Debug.Log("AAAAAAAAAA");
+                StartCoroutine(FollowGameObjectInY());
+            }
         }
+    }
+    IEnumerator FollowGameObjectInY()
+    {
+
+        for (float i = gameObject.transform.position.y; i > characterGameObject.transform.position.y; i -= 0.015f)
+        {
+            gameObject.transform.position = new Vector3(0, i, gameObject.transform.position.z);
+            CoroutineActive = true;
+            yield return new WaitForSeconds(.001f);
+        }
+        CoroutineActive = false;
     }
 }
