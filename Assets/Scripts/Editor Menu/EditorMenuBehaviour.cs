@@ -4,6 +4,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Unity.VisualScripting;
 
 public class EditorMenuBehaviour : MonoBehaviour
 {
@@ -27,12 +29,23 @@ public class EditorMenuBehaviour : MonoBehaviour
     }
     public void AddCard(GameObject cardPrefab)
     {
-        GameObject clone = Instantiate(cardPrefab);
-        clone.transform.SetParent(dmGrid.transform, false);
-        // To eliminate the OnClick functions inside the deck grid
-        clone.GetComponent<Button>().enabled = false;
-    }
+        string cardName = GetCardName(cardPrefab);
+        GameObject card = GetCardByName(cardName);
+        if (card is null)
+        {
+            GameObject clone = Instantiate(cardPrefab);
+            clone.transform.SetParent(dmGrid.transform, false);
+            // To eliminate the OnClick functions inside the deck grid
+            clone.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            //To add a +1 on Number of cards
+            CardManager cardManager = card.GetComponent<CardManager>();
+            cardManager.AddCardNumber(1);
+        }
 
+    }
     public void CheckEmptyDeck()
     {
 
@@ -40,5 +53,45 @@ public class EditorMenuBehaviour : MonoBehaviour
             dmText.SetActive(true);
         else
             dmText.SetActive(false);
+    }
+
+    public List<GameObject> GetCardsInGrid()
+    {
+        List<GameObject> cardsInGrid = new List<GameObject>();
+
+        foreach(Transform child in dmGrid.transform.GetComponentsInChildren<Transform>())
+        {
+            if (child.name.Contains("Clone"))
+            {
+                cardsInGrid.Add(child.gameObject);
+            }
+        }
+        return cardsInGrid;
+    }
+
+    public GameObject GetCardByName(string name)
+    {
+        foreach (GameObject card in GetCardsInGrid())
+        {
+            if (card.transform.childCount > 0)
+            {
+                GameObject CardsTitle = card.transform.Find("Title").gameObject;
+                string nameOfCard = CardsTitle.GetComponent<TextMeshProUGUI>().text;
+                if (nameOfCard == name) return card;
+            }
+        }
+        return null;
+    }
+
+    public string GetCardName(GameObject cardPrefab)
+    {
+        foreach(Transform child in cardPrefab.GetComponentsInChildren<Transform>())
+        {
+            if(child.gameObject.name == "Title")
+            {
+                return child.gameObject.GetComponent<TextMeshProUGUI>().text;
+            }
+        }
+        return "";
     }
 }

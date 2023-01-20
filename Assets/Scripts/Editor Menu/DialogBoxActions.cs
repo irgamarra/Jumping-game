@@ -25,11 +25,8 @@ public class DialogBoxActions : MonoBehaviour
                 break;
             }
         }
-        Debug.Log(textAndScene.Length);
-        Debug.Log(textAndScene);
         string scene = textAndScene.Substring(0, charsToColon -1);
         string text = textAndScene.Substring(charsToColon);
-        Debug.Log(charsToColon + " " + scene + " -- " + text);
         dialogBox.SetActive(true);
         textDialogBox.GetComponent<TextMeshProUGUI>().SetText(text);
         UnityAction acceptAction = () => SceneManager.LoadScene(scene);

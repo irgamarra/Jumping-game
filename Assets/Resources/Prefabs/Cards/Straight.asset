@@ -30,3 +30,4 @@ MonoBehaviour:
           m_StringArgument: Boost()
           m_BoolArgument: 0
         m_CallState: 1
+  numberOfCards: 0

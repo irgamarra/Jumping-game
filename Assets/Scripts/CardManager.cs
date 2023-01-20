@@ -11,6 +11,9 @@ public class CardManager : MonoBehaviour
 {
     public CardPrefab card;
 
+    public TextMeshProUGUI numberOfCards;
+    public GameObject numberOfCardsGO;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public Image artwork;
@@ -24,21 +27,45 @@ public class CardManager : MonoBehaviour
     public void SetAttributes()
     {
         if (card != null)
-        { 
+        {
+
+            AddCardNumber(0);
             nameText.text = card.cardName;
             descriptionText.text = card.description;
             artwork.sprite = card.artwork;
             cardEffect = card.cardEffect;
 
+            // To remove On Click on the Editor screen
             if (SceneManager.GetActiveScene().name != "Editor")
             {
                 Button myButton = GetComponent<Button>();
                 myButton.onClick.AddListener(() =>
                 {
                     cardEffect.Invoke();
-                    Destroy(gameObject);
+
+                    numberOfCards.text = (int.Parse(numberOfCards.text) - 1).ToString();
+                    if(int.Parse(numberOfCards.text) < 1)
+                        Destroy(gameObject);
                 });
             }
+
+
+        }
+    }
+
+    public void AddCardNumber(int number)
+    {
+        int noc = Int32.Parse(numberOfCards.text);
+        noc += number;
+        numberOfCards.text = noc.ToString();
+
+        if (noc > 0)
+        {
+            numberOfCardsGO.SetActive(true);
+        }
+        else
+        {
+            numberOfCardsGO.SetActive(false);
         }
     }
 }

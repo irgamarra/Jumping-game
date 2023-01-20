@@ -5,4 +5,5 @@ using UnityEngine;
 public class DataCard
 {
     public string name;
+    public int uses;
 }

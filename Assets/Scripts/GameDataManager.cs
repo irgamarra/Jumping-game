@@ -7,6 +7,8 @@ using UnityEngine.Playables;
 using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using TMPro;
 
 public class GameDataManager : MonoBehaviour
 {
@@ -56,7 +58,6 @@ public class GameDataManager : MonoBehaviour
                 loadFile = SaveFile.fileToSave;
         }
 
-        Debug.Log(loadFile);
         string fileContents = "";
         // Does the file exist?
         if (File.Exists(loadFile))
@@ -82,6 +83,7 @@ public class GameDataManager : MonoBehaviour
                 cardGO.transform.SetParent(parent, false);
 
                 cardGO.name = "Card";
+                cardGO.transform.Find("NumberOfCards/Text").GetComponent<TextMeshProUGUI>().text = card.uses.ToString();
 
                 cardManager.SetAttributes();
             }
@@ -126,6 +128,7 @@ public class GameDataManager : MonoBehaviour
         {
             DataCard cardData = new DataCard();
             cardData.name = card.gameObject.name;
+            cardData.uses = int.Parse(card.Find("NumberOfCards/Text").GetComponent<TextMeshProUGUI>().text);
 
             dataPath.deck.cards.Add(cardData);
         }

@@ -9,4 +9,5 @@ public class CardPrefab : ScriptableObject
     public string description;
     public Sprite artwork;
     public UnityEvent cardEffect;
+    public int numberOfCards;
 }

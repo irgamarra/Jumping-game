@@ -36,19 +36,19 @@ public class MainCamera : MonoBehaviour
                 gameObject.transform.position = new Vector3(0, charactersY, gameObject.transform.position.z);
             if (charactersY < thisY - thresholdY && !CoroutineActive)
             {
-                Debug.Log("AAAAAAAAAA");
                 StartCoroutine(FollowGameObjectInY());
             }
         }
     }
     IEnumerator FollowGameObjectInY()
     {
+        Debug.Log(1.0f / Time.deltaTime);
 
-        for (float i = gameObject.transform.position.y; i > characterGameObject.transform.position.y; i -= 0.015f)
+        for (float i = gameObject.transform.position.y; i > characterGameObject.transform.position.y; i -= 0.1f)
         {
             gameObject.transform.position = new Vector3(0, i, gameObject.transform.position.z);
             CoroutineActive = true;
-            yield return new WaitForSeconds(.001f);
+            yield return new WaitForSeconds(0.01f);
         }
         CoroutineActive = false;
     }
