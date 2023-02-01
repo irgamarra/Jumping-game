@@ -1,3 +1,3 @@
 # Jumping-game
 
-![](https://thumbs.gfycat.com/SinfulMiniatureIbex-size_restricted.gif)
+![](https://thumbs.gfycat.com/AnimatedThirdKitfox-size_restricted.gif)
