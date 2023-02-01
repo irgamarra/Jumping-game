@@ -43,9 +43,7 @@ public class CardManager : MonoBehaviour
                 {
                     cardEffect.Invoke();
 
-                    numberOfCards.text = (int.Parse(numberOfCards.text) - 1).ToString();
-                    if(int.Parse(numberOfCards.text) < 1)
-                        Destroy(gameObject);
+                    AddCardNumber(-1);
                 });
             }
 
@@ -59,13 +57,12 @@ public class CardManager : MonoBehaviour
         noc += number;
         numberOfCards.text = noc.ToString();
 
-        if (noc > 0)
-        {
+        if (noc > 1)
             numberOfCardsGO.SetActive(true);
-        }
         else
-        {
             numberOfCardsGO.SetActive(false);
-        }
+
+        if (noc < 1)
+            Destroy(gameObject);
     }
 }
