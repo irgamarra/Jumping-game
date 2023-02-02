@@ -25,31 +25,26 @@ public class GameDataManager : MonoBehaviour
     // Create a field for the save file.
     string saveFilesPath;
     string saveFile;
+    string standardName = "gamedata.json";
     EditorLevelData editorLevelData = new EditorLevelData();
 
     void Awake()
     {
         // Update the path once the persistent path exists.
         saveFilesPath = Application.persistentDataPath;
-        saveFile = saveFilesPath + "/gamedata.json";
+        saveFile = saveFilesPath + "/" + standardName;
     }
 
     private void Start()
     {
-        if(SceneManager.GetActiveScene().name == "Level Selector")
-        {
-            PopulateLevelSelector();
-        }
         if (SceneManager.GetActiveScene().name == "Play")
         {
-            Debug.Log(SaveFile.fileToLoad);
             ReadFile(SaveFile.fileToLoad);
         }
     }
 
     public string ReadFile(string loadFile = "")
     {
-        Debug.Log(loadFile);
         if (loadFile == "" || loadFile == null)
         {
             if (SaveFile.fileToSave == "" || SaveFile.fileToSave == null)
@@ -114,7 +109,7 @@ public class GameDataManager : MonoBehaviour
     {
         // To decide the name of the file
         DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
-        this.saveFile = saveFilesPath + "/" + savesDirectory.GetFiles().Length + "gamedata.json";
+        this.saveFile = saveFilesPath + "/" + savesDirectory.GetFiles().Length + standardName;
         SaveFile.fileToSave = this.saveFile;
 
         // FETCH PATH
@@ -188,6 +183,7 @@ public class GameDataManager : MonoBehaviour
 
     public void PopulateLevelSelector()
     {
+        DeleteLevelImages();
         DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
         foreach(FileInfo file in savesDirectory.GetFiles())
         {
@@ -197,7 +193,22 @@ public class GameDataManager : MonoBehaviour
             {
                 SaveFile.fileToLoad = file.FullName;
                 SceneManager.LoadScene("Play");
+
             });
+            
         }
     }
+    public void DeleteLevelImages()
+    {
+        foreach(Transform levelImage in levelsGrid.GetComponentInChildren<Transform>())
+        {
+            Destroy(levelImage.gameObject);
+        }
+    }
+    public void DeleteLevel(int numberOfLevel)
+    {
+        Debug.Log(saveFilesPath + numberOfLevel + standardName);
+        File.Delete(saveFilesPath + "/" + numberOfLevel + standardName);
+    }
+
 }

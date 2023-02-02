@@ -13,11 +13,13 @@ public class DialogBoxActions : MonoBehaviour
     public GameObject textDialogBox;
 
     // As OnClick only accepts one parameter, this method will use strings following the next structure:
-    // "Scene;Text
-    public void OpenScene(string textAndScene)
+    // "Scene;Text"
+    // Scene: The scene to load
+    // Text: The text to show
+    public void OpenScene(string sceneAndText)
     {
         int charsToColon = 0;
-        foreach (char c in textAndScene)
+        foreach (char c in sceneAndText)
         {
             charsToColon++;
             if (c == ';')
@@ -25,8 +27,8 @@ public class DialogBoxActions : MonoBehaviour
                 break;
             }
         }
-        string scene = textAndScene.Substring(0, charsToColon -1);
-        string text = textAndScene.Substring(charsToColon);
+        string scene = sceneAndText.Substring(0, charsToColon -1);
+        string text = sceneAndText.Substring(charsToColon);
         dialogBox.SetActive(true);
         textDialogBox.GetComponent<TextMeshProUGUI>().SetText(text);
         UnityAction acceptAction = () => SceneManager.LoadScene(scene);

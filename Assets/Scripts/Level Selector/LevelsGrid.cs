@@ -1,18 +1,29 @@
+using Assets.Scripts.Level_Selector;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelsGrid : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameDataManager gameDataManager;
+    GameObject eventSystem;
+    List<Transform> gameObjects = new List<Transform>();
+    GameObject levelsGrid;
     void Start()
     {
-        
-    }
+        eventSystem = GameObject.Find("/EventSystem");
+        gameDataManager = eventSystem.GetComponent<GameDataManager>();
+        levelsGrid = GameObject.Find("/Main Canvas/Levels grid");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gameDataManager.PopulateLevelSelector();
+
+        int levelImageIterator = 0;
+        foreach (Transform levelSelector in levelsGrid.GetComponentInChildren<Transform>())
+        {
+            LevelImage levelImage = levelSelector.GetComponent<LevelImage>();
+            levelImage.levelImageNumber = levelImageIterator;
+            levelImageIterator++;
+        }
     }
 }
