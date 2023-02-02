@@ -184,6 +184,7 @@ public class GameDataManager : MonoBehaviour
     public void PopulateLevelSelector()
     {
         DeleteLevelImages();
+        RenameFiles();
         DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
         foreach(FileInfo file in savesDirectory.GetFiles())
         {
@@ -203,6 +204,19 @@ public class GameDataManager : MonoBehaviour
         foreach(Transform levelImage in levelsGrid.GetComponentInChildren<Transform>())
         {
             Destroy(levelImage.gameObject);
+        }
+    }
+    public void RenameFiles()
+    {
+        int fileNumberIterator = 0;
+        DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
+        foreach (FileInfo file in savesDirectory.GetFiles())
+        {
+            Debug.Log(file.FullName);
+            file.MoveTo(saveFilesPath + "/" + fileNumberIterator + standardName);
+
+            Debug.Log(file.FullName);
+            fileNumberIterator++;
         }
     }
     public void DeleteLevel(int numberOfLevel)
