@@ -37,7 +37,7 @@ public class MainCamera : MonoBehaviour
             if (charactersY < thisY - thresholdY && !CoroutineActive)
             {
                 gameObject.transform.position = new Vector3(0, charactersY + thresholdY, gameObject.transform.position.z);
-                // StartCoroutine(FollowGameObjectInY());
+                //StartCoroutine(FollowGameObjectInY());
             }
         }
     }
