@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GetCards : MonoBehaviour
 {
@@ -10,13 +11,16 @@ public class GetCards : MonoBehaviour
 
     private void Awake()
     {
-        handGO = GameObject.Find("/Controls/Canvas/Hand");
-        handManager = handGO.GetComponent<Hand>();
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            handGO = GameObject.Find("/Controls/Canvas/Hand");
+            handManager = handGO.GetComponent<Hand>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") 
+        if (collision.gameObject.tag == "Player" && SceneManager.GetActiveScene().name == "Play") 
         {
             FileInfo[] arrayOfCards = GetCardsAssets();
             // Select 3 random game objects from the array

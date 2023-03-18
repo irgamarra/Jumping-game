@@ -153,8 +153,6 @@ public class GameDataManager : MonoBehaviour
             dataEnemy.posY = enemy.transform.position.y;
             dataEnemy.posZ = enemy.transform.position.z;
             dataPath.enemies.Add(dataEnemy);
-
-            Debug.Log(dataEnemy.name);
         }
 
         // FETCH GOAL
