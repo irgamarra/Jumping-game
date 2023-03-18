@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.XR;
 
 public class GetCards : MonoBehaviour
 {
