@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,19 +13,21 @@ public class GetCards : MonoBehaviour
     public GameObject cardPrefab;
     public int numberOfCards;
     public GameObject handGO;
+    public Hand handManager;
 
     private void Awake()
     {
         handGO = GameObject.Find("/Controls/Canvas/Hand");
+        handManager = handGO.GetComponent<Hand>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") 
         {
-            GameObject[] arrayOfCards = GetCardsArray();
+            FileInfo[] arrayOfCards = GetCardsAssets();
             // Select 3 random game objects from the array
-            GameObject[] selectedObjects = new GameObject[numberOfCards];
+            FileInfo[] selectedObjects = new FileInfo[numberOfCards];
             for (int i = 0; i < numberOfCards; i++)
             {
                 int index = Random.Range(0, arrayOfCards.Length);
@@ -32,46 +35,67 @@ public class GetCards : MonoBehaviour
             }
 
             // Destroy this script component
-            Destroy(this);
+            Destroy(this.gameObject);
 
             // Return the selected game objects
-            GameObject[] selectedObjectsArray = selectedObjects.ToArray();
-            ReturnObjects(selectedObjectsArray);
+            ReturnObjects(selectedObjects);
         }
     }
 
-    void ReturnObjects(GameObject[] selectedObjects)
+    void ReturnObjects(FileInfo[] selectedObjects)
     {
-        // Do something with the selected objects, for example:
-        foreach (GameObject obj in selectedObjects)
+        GameObject[] assetFiles = new GameObject[selectedObjects.Length];
+        // FETCH CARDS
+        for (int i = 0; i < selectedObjects.Length; i++)
         {
-            Debug.Log("Selected object: " + obj.name);
+            string assetName = Path.GetFileNameWithoutExtension(selectedObjects[i].Name);
+            GameObject cardGO = GetGameObjectByCardName(assetName);
+            if (cardGO != null)
+            {
+                cardGO.GetComponent<CardManager>().AddCardNumber(1);
+            }
+            else
+            {
+                Transform parent = handGO.transform;
+                cardGO = Instantiate(cardPrefab);
+                CardManager cardManager = cardGO.GetComponent<CardManager>();
+                cardManager.card = Resources.Load<CardPrefab>("Prefabs/Cards/" + assetName);
+
+                cardGO.transform.SetParent(parent, false);
+
+                cardManager.SetAttributes();
+            }
         }
+        handManager.RefreshHand();
+
+        
     }
 
-    public GameObject[] GetCardsArray()
+    public FileInfo[] GetCardsAssets()
     {
         DirectoryInfo dirInfo = new DirectoryInfo("Assets/Resources/Prefabs/Cards/");
         FileInfo[] files = dirInfo.GetFiles("*.asset");
-
-        GameObject[] assetFiles = new GameObject[files.Length];
-        // FETCH CARDS
-        for (int i = 0; i < files.Length; i++)
+        return files;
+    }
+    GameObject GetGameObjectByCardName(string fileName)
+    {
+        try
         {
-            Debug.Log(files[i].Name);
-            //Transform parent = handGO.transform;
-            //GameObject cardGO = Instantiate(cardPrefab);
-            //CardManager cardManager = cardGO.GetComponent<CardManager>();
-            //cardManager.card = Resources.Load<CardPrefab>("Prefabs/Cards/" + files[i].Name);
+            fileName = Path.GetFileNameWithoutExtension(fileName);
+            GameObject[] cards = GameObjectTools.GetChildren(handGO);
 
-            //cardGO.transform.SetParent(parent, false);
-
-            //cardGO.name = "Card";
-            //cardGO.transform.Find("NumberOfCards/Text").GetComponent<TextMeshProUGUI>().text = card.uses.ToString();
-
-            //cardManager.SetAttributes();
+            foreach (GameObject card in cards)
+            {
+                string cardName = card.GetComponent<CardManager>().card.name;
+                if (fileName == cardName)
+                    return card;
+            }
+        }
+        catch
+        {
+           
         }
 
-        return assetFiles;
+        return null;
     }
 }
