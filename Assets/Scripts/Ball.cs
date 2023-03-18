@@ -21,17 +21,29 @@ namespace BallUtilities
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector2(0, boostForce));
         }
-        public void Right()
+        public void UpRight()
         {
             rb = GameObject.Find("/Ball/Circle").GetComponent<Rigidbody2D>();
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector2(directionalForce, boostForce));
         }
-        public void Left()
+        public void UpLeft()
         {
             rb = GameObject.Find("/Ball/Circle").GetComponent<Rigidbody2D>();
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector2(-directionalForce, boostForce));
+        }
+        public void Left()
+        {
+            rb = GameObject.Find("/Ball/Circle").GetComponent<Rigidbody2D>();
+            rb.velocity = Vector3.zero;
+            rb.AddForce(new Vector2(-boostForce, 0));
+        }
+        public void Right()
+        {
+            rb = GameObject.Find("/Ball/Circle").GetComponent<Rigidbody2D>();
+            rb.velocity = Vector3.zero;
+            rb.AddForce(new Vector2(boostForce, 0));
         }
     }
 }

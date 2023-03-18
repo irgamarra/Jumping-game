@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Left
   m_EditorClassIdentifier: 
   cardName: Left
-  description: Goes left and upwards
+  description: Striaght Left
   artwork: {fileID: 21300000, guid: 5c80be9600fee8e419116eb80523ddb3, type: 3}
   cardEffect:
     m_PersistentCalls:
@@ -29,5 +29,5 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-  numberOfCards: 1
+        m_CallState: 1
+  numberOfCards: 0

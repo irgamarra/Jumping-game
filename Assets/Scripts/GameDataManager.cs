@@ -26,6 +26,8 @@ public class GameDataManager : MonoBehaviour
     string saveFilesPath;
     string saveFile;
     string standardName = "gamedata.json";
+    string imagesPath;
+    DirectoryInfo imagesDirectory;
     EditorLevelData editorLevelData = new EditorLevelData();
 
     void Awake()
@@ -33,14 +35,28 @@ public class GameDataManager : MonoBehaviour
         // Update the path once the persistent path exists.
         saveFilesPath = Application.persistentDataPath;
         saveFile = saveFilesPath + "/" + standardName;
-    }
+        imagesPath = saveFilesPath + "/images/";
 
+        if(!Directory.Exists(imagesPath))
+        {
+            Directory.CreateDirectory(imagesPath);
+        }
+        imagesDirectory = new DirectoryInfo(imagesPath);
+    }
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "Play")
         {
             ReadFile(SaveFile.fileToLoad);
         }
+    }
+
+    public void TakeScreenshot()
+    {
+        
+        int fileNumberIterator = 0;
+        DirectoryInfo imagesDirectory = new DirectoryInfo(imagesPath);
+        ScreenCapture.CaptureScreenshot(imagesPath + imagesDirectory.GetFiles().Length + ".png");
     }
 
     public string ReadFile(string loadFile = "")
@@ -186,17 +202,21 @@ public class GameDataManager : MonoBehaviour
         DeleteLevelImages();
         RenameFiles();
         DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
+        int fileIterator = 0;
         foreach(FileInfo file in savesDirectory.GetFiles())
         {
             GameObject levelImageClone = Instantiate(levelImage);
             levelImageClone.transform.SetParent(levelsGrid.transform);
+            Sprite levelImageSprite = SpriteFromFileImage(imagesPath + fileIterator + ".png");
+            levelImageClone.GetComponent<Image>().sprite = levelImageSprite;
             levelImageClone.GetComponent<Button>().onClick.AddListener(() =>
             {
                 SaveFile.fileToLoad = file.FullName;
                 SceneManager.LoadScene("Play");
 
             });
-            
+
+            fileIterator++;
         }
     }
     public void DeleteLevelImages()
@@ -212,17 +232,51 @@ public class GameDataManager : MonoBehaviour
         DirectoryInfo savesDirectory = new DirectoryInfo(saveFilesPath);
         foreach (FileInfo file in savesDirectory.GetFiles())
         {
-            Debug.Log(file.FullName);
             file.MoveTo(saveFilesPath + "/" + fileNumberIterator + standardName);
 
-            Debug.Log(file.FullName);
+            fileNumberIterator++;
+        }
+        fileNumberIterator = 0;
+        DirectoryInfo imagesDirectory = new DirectoryInfo(imagesPath);
+        foreach (FileInfo file in imagesDirectory.GetFiles())
+        {
+            file.MoveTo(imagesPath + "/" + fileNumberIterator + ".png");
+
             fileNumberIterator++;
         }
     }
     public void DeleteLevel(int numberOfLevel)
     {
-        Debug.Log(saveFilesPath + numberOfLevel + standardName);
         File.Delete(saveFilesPath + "/" + numberOfLevel + standardName);
     }
+    Texture2D LoadTexture(string path)
+    {
+        Texture2D texture = null;
 
+        // Check if the file exists
+        if (File.Exists(path))
+        {
+            // Load the file into a byte array
+            byte[] bytes = File.ReadAllBytes(path);
+
+            // Create a texture from the byte array
+            texture = new Texture2D(2, 2);
+            texture.LoadImage(bytes);
+        }
+
+        return texture;
+    }
+    public Sprite SpriteFromFileImage(string filePath)
+    {
+        // Load the texture from the .png file
+        Texture2D texture = LoadTexture(filePath);
+        Sprite sprite = null;
+        // Check if the texture was loaded successfully
+        if (texture != null)
+        {
+            // Create a sprite from the texture
+            sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        }
+        return sprite;
+    }
 }
