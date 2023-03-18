@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6348039319968929694}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 43bab73425d6a0f48bed43797d3b8e78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,13 +95,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 6348039319968929692}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 0fd2cdb6a02e3fd4c8c4a3712f054317, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1176071, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.256045
 --- !u!50 &6348039319968929694
 Rigidbody2D:
   serializedVersion: 4
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 6348039320358385181}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
