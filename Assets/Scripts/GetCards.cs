@@ -20,7 +20,7 @@ public class GetCards : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && SceneManager.GetActiveScene().name == "Play") 
+        if (collision.gameObject.tag == "Player" || collision.gameObject.name == "Circle") 
         {
             FileInfo[] arrayOfCards = GetCardsAssets();
             // Select 3 random game objects from the array

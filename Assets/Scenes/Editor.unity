@@ -890,7 +890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2010983260, guid: 352456840e3ac0a418f0863f8ae9868e, type: 3}
+  m_Sprite: {fileID: 1075655150, guid: 82a3b90ea0ff3a440a012dbbf7ce3d3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1686,6 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -2032,7 +2033,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &628757023
@@ -4757,7 +4758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -182260298, guid: 4b7b2011800c0e94d89a4f0b96be73db, type: 3}
+  m_Sprite: {fileID: -182260298, guid: b6c35712cf176f6428bbaf132561380b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
