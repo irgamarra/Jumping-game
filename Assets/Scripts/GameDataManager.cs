@@ -108,7 +108,7 @@ public class GameDataManager : MonoBehaviour
 
                 enemyGO.transform.SetParent(parent, false);
 
-                enemyGO.transform.position = new Vector3(enemy.posX, enemy.posY, enemy.posZ);
+                enemyGO.transform.position = new Vector3(enemy.posX, enemy.posY, 0);
             }
 
             // FETCH GOAL
