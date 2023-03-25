@@ -22,9 +22,9 @@ public class GetCards : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.name == "Circle") 
         {
-            FileInfo[] arrayOfCards = GetCardsAssets();
+            CardPrefab[] arrayOfCards = GetCardsAssets();
             // Select 3 random game objects from the array
-            FileInfo[] selectedObjects = new FileInfo[numberOfCards];
+            CardPrefab[] selectedObjects = new CardPrefab[numberOfCards];
             for (int i = 0; i < numberOfCards; i++)
             {
                 int index = Random.Range(0, arrayOfCards.Length);
@@ -39,24 +39,25 @@ public class GetCards : MonoBehaviour
         }
     }
 
-    void ReturnObjects(FileInfo[] selectedObjects)
+    void ReturnObjects(CardPrefab[] selectedObjects)
     {
-        GameObject[] assetFiles = new GameObject[selectedObjects.Length];
         // FETCH CARDS
         for (int i = 0; i < selectedObjects.Length; i++)
         {
-            string assetName = Path.GetFileNameWithoutExtension(selectedObjects[i].Name);
+            string assetName = Path.GetFileNameWithoutExtension(selectedObjects[i].cardName);
             GameObject cardGO = GetGameObjectByCardName(assetName);
+            // If card exists, add a use
             if (cardGO != null)
             {
                 cardGO.GetComponent<CardManager>().AddCardNumber(1);
             }
+            // If card does not exists, create one
             else
             {
                 Transform parent = handGO.transform;
                 cardGO = Instantiate(cardPrefab);
                 CardManager cardManager = cardGO.GetComponent<CardManager>();
-                cardManager.card = Resources.Load<CardPrefab>("Prefabs/Cards/" + assetName);
+                cardManager.card = selectedObjects[i];
 
                 cardGO.transform.SetParent(parent, false);
 
@@ -68,24 +69,26 @@ public class GetCards : MonoBehaviour
         
     }
 
-    public FileInfo[] GetCardsAssets()
+    public CardPrefab[] GetCardsAssets()
     {
-        DirectoryInfo dirInfo = new DirectoryInfo("Assets/Resources/Prefabs/Cards/");
-        FileInfo[] files = dirInfo.GetFiles("*.asset");
-        return files;
+        CardPrefab[] cards = Resources.LoadAll<CardPrefab>("Prefabs/Cards/");
+
+        return cards;
     }
-    GameObject GetGameObjectByCardName(string fileName)
+    GameObject GetGameObjectByCardName(string name)
     {
         try
         {
-            fileName = Path.GetFileNameWithoutExtension(fileName);
             GameObject[] cards = GameObjectTools.GetChildren(handGO);
 
             foreach (GameObject card in cards)
             {
-                string cardName = card.GetComponent<CardManager>().card.name;
-                if (fileName == cardName)
+                
+                string cardName = card.GetComponent<CardManager>().card.cardName;
+                if (name == cardName)
                     return card;
+
+                Debug.Log(name + cardName);
             }
         }
         catch
