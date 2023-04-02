@@ -38,11 +38,7 @@ public class Goal : MonoBehaviour
         CalculateWallSize(leftWall);
         CalculateWallSize(rightWall);
     }
-    private void Update()
-    {
-        selfPos = gameObject.transform.position;
-        Debug.Log(selfPos);
-    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "Circle")
