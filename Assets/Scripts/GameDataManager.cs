@@ -42,13 +42,15 @@ public class GameDataManager : MonoBehaviour
             Directory.CreateDirectory(imagesPath);
         }
         imagesDirectory = new DirectoryInfo(imagesPath);
-    }
-    private void Start()
-    {
+
         if (SceneManager.GetActiveScene().name == "Play")
         {
             ReadFile(SaveFile.fileToLoad);
         }
+    }
+    private void Start()
+    {
+        
     }
 
     public void TakeScreenshot()

@@ -87,8 +87,6 @@ public class GetCards : MonoBehaviour
                 string cardName = card.GetComponent<CardManager>().card.cardName;
                 if (name == cardName)
                     return card;
-
-                Debug.Log(name + cardName);
             }
         }
         catch
