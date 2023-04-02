@@ -9,8 +9,8 @@ public class Goal : MonoBehaviour
     public string characterName = "Circle";
     public GameObject winScreen;
 
-    GameObject leftWall;
-    GameObject rightWall;
+    Wall leftWall;
+    Wall rightWall;
     GameObject floor;
 
     Vector3 selfPos;
@@ -19,8 +19,8 @@ public class Goal : MonoBehaviour
 
     private void Awake()
     {
-        leftWall = GameObject.Find("/Path/Left wall");
-        rightWall = GameObject.Find("/Path/Right wall");
+        leftWall = new Wall(GameObject.Find("/Path/Left wall"));
+        rightWall = new Wall(GameObject.Find("/Path/Right wall"));
         floor = GameObject.Find("/Path/Floor");
     }
 
@@ -35,8 +35,8 @@ public class Goal : MonoBehaviour
             winScreen = GameObject.Find("WinScreen");
         }
 
-        CalculateWallSize(leftWall);
-        CalculateWallSize(rightWall);
+        leftWall.CalculateWallSize(floor,this.gameObject);
+        rightWall.CalculateWallSize(floor, this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,50 +57,50 @@ public class Goal : MonoBehaviour
         if(spawnPoint.y > floor.transform.position.y)
             gameObject.transform.position = new Vector3 (selfPos.x, spawnPoint.y, selfPos.z);
 
-        CalculateWallSize(leftWall);
-        CalculateWallSize(rightWall);
+        leftWall.CalculateWallSize(floor, this.gameObject);
+        rightWall.CalculateWallSize(floor, this.gameObject);
     }
 
-    private void CalculateWallSize(GameObject wall)
-    {
-        Vector2 wallSize = new Vector2();
+    //private void CalculateWallSize(GameObject wall)
+    //{
+    //    Vector2 wallSize = new Vector2();
 
-        SpriteRenderer wallSpriteRenderer = wall.GetComponent<SpriteRenderer>();
-        BoxCollider2D wallCollider = wall.GetComponent<BoxCollider2D>();
+    //    SpriteRenderer wallSpriteRenderer = wall.GetComponent<SpriteRenderer>();
+    //    BoxCollider2D wallCollider = wall.GetComponent<BoxCollider2D>();
 
-        float wallSizeWidth =  wallSpriteRenderer.size.x;
-        float wallSizeHeight = 0.0f;
+    //    float wallSizeWidth =  wallSpriteRenderer.size.x;
+    //    float wallSizeHeight = 0.0f;
         
-        if (floor.transform.localPosition.y < 0)
-            wallSizeHeight = floor.transform.position.y * -1;
-        else
-            wallSizeHeight = floor.transform.position.y;
+    //    if (floor.transform.localPosition.y < 0)
+    //        wallSizeHeight = floor.transform.position.y * -1;
+    //    else
+    //        wallSizeHeight = floor.transform.position.y;
 
-        wallSizeHeight += this.transform.localPosition.y;
+    //    wallSizeHeight += this.transform.localPosition.y;
             
-        wallSize.x = wallSizeWidth;
-        wallSize.y = wallSizeHeight;
+    //    wallSize.x = wallSizeWidth;
+    //    wallSize.y = wallSizeHeight;
         
-        wallSpriteRenderer.size = wallSize;
-        wallCollider.size = wallSize;
+    //    wallSpriteRenderer.size = wallSize;
+    //    wallCollider.size = wallSize;
 
-        CalculateWallPosition(wall);
-    }
+    //    CalculateWallPosition(wall);
+    //}
 
-    private void CalculateWallPosition(GameObject wall)
-    {
-        float goalY = this.transform.localPosition.y;
-        float floorY = floor.transform.localPosition.y;
+    //private void CalculateWallPosition(GameObject wall)
+    //{
+    //    float goalY = this.transform.localPosition.y;
+    //    float floorY = floor.transform.localPosition.y;
 
-        float wallX = wall.transform.localPosition.x;
-        float wallY = 0.0f;
-        float wallZ = wall.transform.localPosition.z;
+    //    float wallX = wall.transform.localPosition.x;
+    //    float wallY = 0.0f;
+    //    float wallZ = wall.transform.localPosition.z;
 
-        if (floorY > 0 && goalY > 0)
-            wallY = (goalY - floorY) / 2;
-        else
-            wallY = (goalY + floorY) / 2;
+    //    if (floorY > 0 && goalY > 0)
+    //        wallY = (goalY - floorY) / 2;
+    //    else
+    //        wallY = (goalY + floorY) / 2;
 
-        wall.transform.localPosition = new Vector3 (wallX,wallY,wallZ);
-    }
+    //    wall.transform.localPosition = new Vector3 (wallX,wallY,wallZ);
+    //}
 }
