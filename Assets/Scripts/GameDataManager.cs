@@ -240,8 +240,14 @@ public class GameDataManager : MonoBehaviour
         DirectoryInfo imagesDirectory = new DirectoryInfo(imagesPath);
         foreach (FileInfo file in imagesDirectory.GetFiles())
         {
-            file.MoveTo(imagesPath + "/" + fileNumberIterator + ".png");
+            try
+            {
+                file.MoveTo(imagesPath + "/" + fileNumberIterator + ".png");
+            }
+            catch
+            {
 
+            }
             fileNumberIterator++;
         }
     }
