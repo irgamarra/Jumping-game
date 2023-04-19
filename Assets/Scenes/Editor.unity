@@ -2268,7 +2268,7 @@ PrefabInstance:
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: 7225c2fe385070b489ea0ff563ef9995, type: 2}
+      objectReference: {fileID: 11400000, guid: 27e2f0544f8a0344a9ed90d2b0631d4d, type: 2}
     - target: {fileID: 6425618901173149555, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3118,7 +3118,7 @@ PrefabInstance:
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: b1a1aec2413fa3040976375339b8e3f1, type: 2}
+      objectReference: {fileID: 11400000, guid: 1ca8155e4b64ce24e9bbaf9d089d5ec7, type: 2}
     - target: {fileID: 6425618901173149555, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3420,7 +3420,7 @@ PrefabInstance:
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: a383213e1c446ce40a58e66f68c737db, type: 2}
+      objectReference: {fileID: 11400000, guid: d51f0f89b4360d04fa134779c9292eb2, type: 2}
     - target: {fileID: 6425618901173149555, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5649,7 +5649,7 @@ PrefabInstance:
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: f5c3781a863954340a168a0525ae32eb, type: 2}
+      objectReference: {fileID: 11400000, guid: af55855e86ec8f44c811cd7db451ec58, type: 2}
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: cardEffect.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -5976,7 +5976,7 @@ PrefabInstance:
     - target: {fileID: 6425618901173149554, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 11400000, guid: c01d9df2a7244024999919df024d9abc, type: 2}
+      objectReference: {fileID: 11400000, guid: 8a5e5d20ba1a48048ac7e2a902cc1384, type: 2}
     - target: {fileID: 6425618901173149555, guid: 88dc965529e1e014ab1e97c756dd0e52, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
