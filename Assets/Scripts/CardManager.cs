@@ -14,8 +14,8 @@ public class CardManager : MonoBehaviour
     public TextMeshProUGUI numberOfCards;
     public GameObject numberOfCardsGO;
 
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
+    //public TextMeshProUGUI nameText;
+   //public TextMeshProUGUI descriptionText;
     public Image artwork;
     public UnityEvent cardEffect;
     public GameObject hand;
@@ -30,8 +30,8 @@ public class CardManager : MonoBehaviour
         {
 
             AddCardNumber(0);
-            nameText.text = card.cardName;
-            descriptionText.text = card.description;
+            //nameText.text = card.cardName;
+            //descriptionText.text = card.description;
             artwork.sprite = card.artwork;
             cardEffect = card.cardEffect;
 
