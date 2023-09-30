@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.99215686}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -504,7 +504,6 @@ MonoBehaviour:
   card: {fileID: 0}
   numberOfCards: {fileID: 1899310794414699801}
   numberOfCardsGO: {fileID: 3961782553833612244}
-  nameText: {fileID: 0}
   artwork: {fileID: 6425618900663520635}
   cardEffect:
     m_PersistentCalls:
