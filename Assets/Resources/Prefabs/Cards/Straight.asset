@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Straight
   description: Goes straight upwards
-  artwork: {fileID: 21300000, guid: d81e1b6a3b3d12d45b9802b9b88de33d, type: 3}
+  artwork: {fileID: 21300000, guid: 7af6ad9c9d26e0f4f87133f22b7bdb15, type: 3}
   cardEffect:
     m_PersistentCalls:
       m_Calls:
