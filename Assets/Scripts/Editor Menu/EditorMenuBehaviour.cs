@@ -31,6 +31,7 @@ public class EditorMenuBehaviour : MonoBehaviour
     {
         string cardName = GetCardName(cardPrefab);
         GameObject card = GetCardByName(cardName);
+        
         if (card is null)
         {
             GameObject clone = Instantiate(cardPrefab);
@@ -75,9 +76,8 @@ public class EditorMenuBehaviour : MonoBehaviour
         {
             if (card.transform.childCount > 0)
             {
-                GameObject CardsTitle = card.transform.Find("Title").gameObject;
-                string nameOfCard = CardsTitle.GetComponent<TextMeshProUGUI>().text;
-                if (nameOfCard == name) return card;
+                string cardName = GetCardName(card);
+                if (cardName == name) return card;
             }
         }
         return null;
@@ -85,13 +85,6 @@ public class EditorMenuBehaviour : MonoBehaviour
 
     public string GetCardName(GameObject cardPrefab)
     {
-        foreach(Transform child in cardPrefab.GetComponentsInChildren<Transform>())
-        {
-            if(child.gameObject.name == "Title")
-            {
-                return child.gameObject.GetComponent<TextMeshProUGUI>().text;
-            }
-        }
-        return "";
+        return cardPrefab.GetComponent<CardManager>().card.cardName;
     }
 }

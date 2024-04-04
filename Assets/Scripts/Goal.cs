@@ -28,7 +28,6 @@ public class Goal : MonoBehaviour
     {
         cam = Camera.main;
         selfPos = gameObject.transform.position;
-        Debug.Log(selfPos);
 
         if (winScreen == null)
         {
