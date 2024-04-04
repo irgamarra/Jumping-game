@@ -1,3 +1,4 @@
+// I'm in EditorSystem object!!
 // Add System.IO to work with files!
 using System.IO;
 using System.Collections;
@@ -207,6 +208,7 @@ public class GameDataManager : MonoBehaviour
         {
             GameObject levelImageClone = Instantiate(levelImage);
             levelImageClone.transform.SetParent(levelsGrid.transform);
+            levelImageClone.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             Sprite levelImageSprite = SpriteFromFileImage(imagesPath + fileIterator + ".png");
             levelImageClone.GetComponent<Image>().sprite = levelImageSprite;
             levelImageClone.GetComponent<Button>().onClick.AddListener(() =>
